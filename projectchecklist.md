@@ -48,11 +48,11 @@ and/or
 
 Rough breakdown of tasks:
 
-Jackie: Local storage/input forms
+Jackie: Local storage / input forms
 
-Trace: Music API/CSS
+Trace: Music API / CSS
 
-Michael: Background Images/HTML
+Michael: Background Images/ HTML
 
-Walter: Weather API/Initial HTML structure
+Walter: Weather API / Initial HTML structure
 
