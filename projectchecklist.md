@@ -9,16 +9,16 @@ Need motivation to study?? Is it snowing outside and you need to set the soundtr
 User Story: 
 
 GIVEN I am a user
-WHEN I enter my zipcode and submit to the page
+WHEN I enter my zipcode and submit it to the page
 THEN I am served the weather for my area
+
+GIVEN I am a user
+WHEN my weather conditions appear on the screen
+THEN I am served a single curated playlist
 
 GIVEN I am the user
 WHEN I submit a new location
 THEN I am given a new weather condition/playlist
-
-GIVEN I am a user
-WHEN I see the weather on screen
-THEN I am served a single curated playlist
 
 GIVEN the user wants to control the song
 WHEN I press the pause/skip button is pushed
@@ -40,8 +40,11 @@ WIREFRAME:
 
 API's:
 
-Spotify and/or Soundcloud
-Openweather
+[Spotify](https://developer.spotify.com/documentation/web-api/quick-start/) 
+and/or 
+[Soundcloud](https://developers.soundcloud.com/docs/api/guide)
+
+[Openweather](https://openweathermap.org/current)
 
 Rough breakdown of tasks:
 
