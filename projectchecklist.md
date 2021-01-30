@@ -46,7 +46,10 @@ Openweather
 Rough breakdown of tasks:
 
 Jackie: Local storage / input forms
+
 Trace: Music API / CSS
+
 Michael: Background Images/ HTML
+
 Walter: Weather API / Initial HTML structure
 
