@@ -26,8 +26,32 @@
 //Form Code
 
 //Submit listener
-
+var submitBtn = document.querySelector(".btn-submit");
 //input value is assigned a variable
+var cityInput = document.querySelector("input");
+var cityListEl = document.querySelector("#city-list");
+var pastCityNames = [];
+
+submitBtn.addEventListener("click", function(event){
+
+    event.preventDefault();
+
+    cityName = cityInput.value;
+
+    if(cityName != ""){
+
+        var newCityEl = document.createElement("button");
+        newCityEl.textContent = cityName;
+
+        var newLineEl = document.createElement("br")
+
+        cityListEl.append(newCityEl);
+        cityListEl.append(newLineEl);
+
+    }
+
+});
+
 
 //Add variable to Local Storage
 
