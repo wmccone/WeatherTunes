@@ -2,9 +2,57 @@
 
 // Display current city in header of the Weather Element
 // Display current weather condition in the text of the Weather Element
+var currentCityName = document.querySelector("#currentcity")
+var currentTempurature = document.querySelector("#cur-temp")
+var currentHumidity = document.querySelector("#cur-humid")
+var currentWindSpeed = document.querySelector("#cur-wndspeed")
+var currentDateEl = document.querySelector("#currentdate")
+var currentWeatherEl = document.querySelector("#currentweather")
+var dateVar = moment().format('L');
+var apiKey = "86be0edea7b654b425b0a2a7b7fa2fe5"
+var currentWeatherCondition = ""
 
+function printCurrentWeather(result) {
+    currentWeatherCondition = result.weather[0].main
+    currentCityName.textContent = result.name + ": "
+    currentTempurature.textContent = "Temperature: " + result.main.temp + "°F"
+    currentHumidity.textContent = "Humidity : " + result.main.humidity + "%"
+    currentWindSpeed.textContent = "Wind Speed: " + result.wind.speed + " MPH"
+    currentDateEl.textContent = dateVar
+    var iconLoc = "https://openweathermap.org/img/wn/" + result.weather[0].icon + "@2x.png"
+    currentWeatherEl.setAttribute("src", iconLoc)
+    console.log(currentWeatherCondition)
+    return currentWeatherCondition
+}
 
+// This function is going to search the Open Weather API for the fields associated with the city
+function searchWeatherApi(query) {
+    var cityName = query
+    var locationURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial" + "&appid=" + apiKey
 
+    fetch(locationURL)
+        .then(function (response) {
+            // If API does not respond throw up an error
+            if (!response.ok) {
+                throw response.json();
+            }
+
+            return response.json();
+        })
+        .then(function (locationres) {
+
+            // If location does not exist throw up a message to the user.
+            if (!locationres) {
+
+                console.log("no results found")
+                return
+            }
+            //Once API repsonds print the conditions
+            else {
+                printCurrentWeather(locationres) 
+            }
+        })
+    }
 
 
 
@@ -49,6 +97,7 @@ submitBtn.addEventListener("click", function(event){
         cityListEl.append(newLineEl);
 
     }
+    searchWeatherApi(cityName)
 
 });
 
