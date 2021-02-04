@@ -61,9 +61,8 @@ function searchWeatherApi(query) {
 //Receive the weather condition into the Playlist function
 
 
-
-
 //Background APP code
+
 function changeBackground(condition){
     if (condition == "Clear" || condition == "Clouds"){
         document.body.style.backgroundImage = "url('./assets/images/sun.jpg')";
