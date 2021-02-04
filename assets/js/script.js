@@ -122,6 +122,7 @@ var submitBtn = document.querySelector(".btn-submit");
 var cityInput = document.querySelector("input");
 var cityListEl = document.querySelector("#city-list");
 var pastCityNames = [];
+var cityName;
 
 submitBtn.addEventListener("click", function(event){
 
@@ -130,21 +131,47 @@ submitBtn.addEventListener("click", function(event){
     cityName = cityInput.value;
 
     if(cityName != ""){
-
-        var newCityEl = document.createElement("button");
-        newCityEl.textContent = cityName;
-
-        var newLineEl = document.createElement("br")
-
-        cityListEl.append(newCityEl);
-        cityListEl.append(newLineEl);
+        // clears buttons 
+        cityListEl.innerHTML = "";
+        // add to array for storage
+        pastCityNames.push(cityName);
+        addPastCity();
 
     }
     searchWeatherApi(cityName)
 
 });
 
+function addPastCity(){
+    // create buttons for each city thats been searched
+    for (var i = 0; i < pastCityNames.length ; i ++){
 
-//Add variable to Local Storage
+        var newCityEl = document.createElement("button");
+        newCityEl.textContent = pastCityNames[i];
 
-// Display local storage to list below form
+        var newLineEl = document.createElement("br")
+
+        cityListEl.append(newCityEl);
+        cityListEl.append(newLineEl);
+    }
+
+    storeCities();
+
+}
+
+function storeCities(){
+    localStorage.setItem("storedCities", JSON.stringify(pastCityNames));
+}
+
+function init(){
+    var storedCities = JSON.parse(localStorage.getItem("storedCities"));
+
+    if(storedCities != null){
+        pastCityNames = storedCities;
+        addPastCity();
+    }
+}
+
+init();
+
+
