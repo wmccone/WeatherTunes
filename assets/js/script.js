@@ -59,11 +59,26 @@ function searchWeatherApi(query) {
 //Music APP Code
 //Receive the weather condition into the Playlist function
 
-var iframeElement   = document.querySelector('iframe');
-var iframeElementID = iframeElement.id;
-var widget1         = SC.Widget(iframeElement);
-var widget2         = SC.Widget(iframeElementID);
-// widget1 === widget2
+SC.initialize({
+    client_id: 'YOUR_CLIENT_ID'
+  });
+
+var title = document.getElementById('title');
+var info = document.getElementById('currentsong');
+var currentPlayer;
+
+
+//Bind will allow us to add a listener function for the change in weather
+
+
+// SC.initialize({
+//   client_id: 'YOUR_CLIENT_ID'
+// });
+
+// var track_url = 'https://soundcloud.com/forss/flickermood';
+// SC.oEmbed(track_url, { auto_play: true }).then(function(oEmbed) {
+//   console.log('oEmbed response: ', oEmbed);
+// });
 
 
 
