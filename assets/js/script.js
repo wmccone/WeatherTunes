@@ -64,7 +64,6 @@ function searchWeatherApi(query) {
 
 
 //Background APP code
-//Create a function that receives weather condition and adds a new background based off of that condition
 function changeBackground(condition){
     if (condition == "Clear" || condition == "Clouds"){
         document.body.style.backgroundImage = "url('./assets/images/sun.jpg')";
@@ -83,13 +82,7 @@ function changeBackground(condition){
     }
 }
 
-
-
-
-
-
 //Form Code
-
 //Submit listener
 var submitBtn = document.querySelector(".btn-submit");
 //input value is assigned a variable
