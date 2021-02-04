@@ -104,6 +104,7 @@ function addPastCity(){
     for (var i = 0; i < pastCityNames.length ; i ++){
 
         var newCityEl = document.createElement("button");
+        newCityEl.setAttribute("class", "btn-city");
         newCityEl.textContent = pastCityNames[i];
 
         var newLineEl = document.createElement("br")
@@ -114,6 +115,14 @@ function addPastCity(){
 
     storeCities();
 
+    //added event listeners for each city button that was created
+    var cityBtn = document.querySelectorAll(".btn-city");
+    cityBtn.forEach(function(cityBtn) {
+        cityBtn.addEventListener("click", function(){
+            var clickedCity = this.textContent;
+            searchWeatherApi(clickedCity);
+        })
+    })
 }
 
 function storeCities(){
