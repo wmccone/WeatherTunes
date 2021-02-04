@@ -81,9 +81,8 @@ var currentPlayer;
 //   console.log('oEmbed response: ', oEmbed);
 // });
 
-
-
 //Background APP code
+
 function changeBackground(condition){
     if (condition == "Clear" || condition == "Clouds"){
         document.body.style.backgroundImage = "url('./assets/images/sun.jpg')";
