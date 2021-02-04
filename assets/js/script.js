@@ -61,7 +61,7 @@ function searchWeatherApi(query) {
 //Receive the weather condition into the Playlist function
 
 SC.initialize({
-    client_id: 'YOUR_CLIENT_ID'
+    client_id: 'kBLKJhEyQs2MxUMvWTKRNCBqICUPZOD0'
   });
 
 var title = document.getElementById('title');
