@@ -9,8 +9,8 @@ var currentWindSpeed = document.querySelector("#cur-wndspeed")
 var currentDateEl = document.querySelector("#currentdate")
 var currentWeatherEl = document.querySelector("#currentweather")
 var dateVar = moment().format('L');
-var apiKey = "86be0edea7b654b425b0a2a7b7fa2fe5"
-var currentWeatherCondition = ""
+var apiKey = "86be0edea7b654b425b0a2a7b7fa2fe5";
+var currentWeatherCondition = "";
 
 function printCurrentWeather(result) {
     currentWeatherCondition = result.weather[0].main
@@ -21,7 +21,8 @@ function printCurrentWeather(result) {
     currentDateEl.textContent = dateVar
     var iconLoc = "https://openweathermap.org/img/wn/" + result.weather[0].icon + "@2x.png"
     currentWeatherEl.setAttribute("src", iconLoc)
-    console.log(currentWeatherCondition)
+    console.log(currentWeatherCondition);
+    changeBackground(currentWeatherCondition);
     return currentWeatherCondition
 }
 
@@ -61,11 +62,26 @@ function searchWeatherApi(query) {
 
 
 //Background APP code
-//Create a function that receives weather condition and adds a new background based off of that condition
 
+function changeBackground(condition){
+    if (condition == "Clear" || condition == "Clouds"){
+        document.body.style.backgroundImage = "url('./assets/images/sun.jpg')";
+    }
+    else if (condition == "Drizzle" || condition == "Rain"){
+        document.body.style.backgroundImage = "url('./assets/images/rain.jpg')";
+    }
+    else if (condition == "Thunderstorm"){
+        document.body.style.backgroundImage = "url('./assets/images/thunder.jpg')";
+    }
+    else if (condition == "Snow") {
+        document.body.style.backgroundImage = "url('./assets/images/snow.jpg')";
+    }
+    else{
+        document.body.style.backgroundImage = "url('./assets/images/fog.jpg')";
+    }
+}
 
 //Form Code
-
 //Submit listener
 var submitBtn = document.querySelector(".btn-submit");
 //input value is assigned a variable
@@ -97,6 +113,7 @@ function addPastCity(){
     for (var i = 0; i < pastCityNames.length ; i ++){
 
         var newCityEl = document.createElement("button");
+        newCityEl.setAttribute("class", "btn-city");
         newCityEl.textContent = pastCityNames[i];
 
         var newLineEl = document.createElement("br")
@@ -107,6 +124,14 @@ function addPastCity(){
 
     storeCities();
 
+    //added event listeners for each city button that was created
+    var cityBtn = document.querySelectorAll(".btn-city");
+    cityBtn.forEach(function(cityBtn) {
+        cityBtn.addEventListener("click", function(){
+            var clickedCity = this.textContent;
+            searchWeatherApi(clickedCity);
+        })
+    })
 }
 
 function storeCities(){
