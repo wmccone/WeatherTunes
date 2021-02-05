@@ -2,12 +2,12 @@
 
 // Display current city in header of the Weather Element
 // Display current weather condition in the text of the Weather Element
-var currentCityName = document.querySelector("#currentcity")
-var currentTempurature = document.querySelector("#cur-temp")
-var currentHumidity = document.querySelector("#cur-humid")
-var currentWindSpeed = document.querySelector("#cur-wndspeed")
-var currentDateEl = document.querySelector("#currentdate")
-var currentWeatherEl = document.querySelector("#currentweather")
+var currentCityName = document.querySelector("#currentcity");
+var currentTempurature = document.querySelector("#cur-temp");
+var currentHumidity = document.querySelector("#cur-humid");
+var currentWindSpeed = document.querySelector("#cur-wndspeed");
+var currentDateEl = document.querySelector("#currentdate");
+var currentWeatherEl = document.querySelector("#currentweather");
 var dateVar = moment().format('L');
 var apiKey = "86be0edea7b654b425b0a2a7b7fa2fe5";
 var currentWeatherCondition = "";
@@ -23,6 +23,7 @@ function printCurrentWeather(result) {
     currentWeatherEl.setAttribute("src", iconLoc)
     console.log(currentWeatherCondition);
     changeBackground(currentWeatherCondition);
+
     return currentWeatherCondition
 }
 
@@ -56,25 +57,72 @@ function searchWeatherApi(query) {
     }
 
 
-
 //Music APP Code
-//Receive the weather condition into the Playlist function
 
+var musicWidgetEl = document.querySelector("iframe");
+var googopener = "AIzaSyAb9dAwTdMAi7MJtXWXB7L1536q-F72RTk";
+// create a function to update the music to the page
+function printMusic(results){
+    //this will help pull the video ID for the first video in the search results
+    var musicID = results.items[0].id.videoId;
+    var musicUrl = "https://www.youtube.com/embed/"+musicID;
+    console.log(musicUrl);
+    musicWidgetEl.setAttribute("src", musicUrl);
+}
+//Receive the weather condition into the fetch function
 
-//Background APP code
+function searchMusicAPI(query){
+    var condition = query
+
+    //fetches the first 5 video results for weather condition + lofi
+    var soundCloudFetch = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelType=any&maxResults=5&order=relevance&q="+condition+"%20lofi&key="+googopener
+
+    fetch(soundCloudFetch)
+    .then(function (response) {
+        // If API does not respond throw up an error
+        if (!response.ok) {
+            throw response.json();
+        }
+
+        return response.json();
+    })
+    .then(function (music) {
+
+        // If location does not exist throw up a message to the user.
+        if (!music) {
+
+            console.log("no results found");
+            return
+        }
+        //Once API repsonds print the conditions
+        else {
+            console.log(music);
+            printMusic(music);
+        }
+    })
+}
 
 function changeBackground(condition){
+    var weatherResult =""
     if (condition == "Clear" || condition == "Clouds"){
         document.body.style.backgroundImage = "url('./assets/images/sun.jpg')";
+        weatherResult = "sunny";
+        searchMusicAPI(weatherResult);
     }
     else if (condition == "Drizzle" || condition == "Rain"){
         document.body.style.backgroundImage = "url('./assets/images/rain.jpg')";
+        weatherResult = "rainy";
+        searchMusicAPI(weatherResult);
     }
     else if (condition == "Thunderstorm"){
         document.body.style.backgroundImage = "url('./assets/images/thunder.jpg')";
+        weatherResult = "rainy";
+        searchMusicAPI(weatherResult);
     }
     else if (condition == "Snow") {
         document.body.style.backgroundImage = "url('./assets/images/snow.jpg')";
+        weatherResult = "rainy";
+        searchMusicAPI(weatherResult);
     }
     else{
         document.body.style.backgroundImage = "url('./assets/images/fog.jpg')";
@@ -104,7 +152,7 @@ submitBtn.addEventListener("click", function(event){
         addPastCity();
 
     }
-    searchWeatherApi(cityName)
+    searchWeatherApi(cityName);
 
 });
 
