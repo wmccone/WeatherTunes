@@ -23,6 +23,7 @@ function printCurrentWeather(result) {
     currentWeatherEl.setAttribute("src", iconLoc)
     console.log(currentWeatherCondition);
     changeBackground(currentWeatherCondition);
+    searchMusicAPI(currentWeatherCondition);
 
     return currentWeatherCondition
 }
@@ -63,16 +64,18 @@ var musicWidgetEl = document.querySelector("iframe");
 var googopener = "AIzaSyAb9dAwTdMAi7MJtXWXB7L1536q-F72RTk";
 // create a function to update the music to the page
 function printMusic(results){
+    console.log("results", results);
+    // pick a random video
+    var itemNumber = Math.floor(Math.random() * Math.floor(results.items.length));
     //this will help pull the video ID for the first video in the search results
-    var musicID = results.items[0].id.videoId;
+    var musicID = results.items[itemNumber].id.videoId;
     var musicUrl = "https://www.youtube.com/embed/"+musicID;
     console.log(musicUrl);
     musicWidgetEl.setAttribute("src", musicUrl);
 }
 //Receive the weather condition into the fetch function
 
-function searchMusicAPI(query){
-    var condition = query
+function searchMusicAPI(condition){
 
     //fetches the first 5 video results for weather condition + lofi
     var soundCloudFetch = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelType=any&maxResults=5&order=relevance&q="+condition+"%20lofi&key="+googopener
@@ -103,26 +106,18 @@ function searchMusicAPI(query){
 }
 
 function changeBackground(condition){
-    var weatherResult =""
+
     if (condition == "Clear" || condition == "Clouds"){
         document.body.style.backgroundImage = "url('./assets/images/sun.jpg')";
-        weatherResult = "sunny";
-        searchMusicAPI(weatherResult);
     }
     else if (condition == "Drizzle" || condition == "Rain"){
         document.body.style.backgroundImage = "url('./assets/images/rain.jpg')";
-        weatherResult = "rainy";
-        searchMusicAPI(weatherResult);
     }
     else if (condition == "Thunderstorm"){
         document.body.style.backgroundImage = "url('./assets/images/thunder.jpg')";
-        weatherResult = "rainy";
-        searchMusicAPI(weatherResult);
     }
     else if (condition == "Snow") {
         document.body.style.backgroundImage = "url('./assets/images/snow.jpg')";
-        weatherResult = "rainy";
-        searchMusicAPI(weatherResult);
     }
     else{
         document.body.style.backgroundImage = "url('./assets/images/fog.jpg')";
