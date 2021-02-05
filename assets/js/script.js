@@ -69,6 +69,7 @@ function changeBackground(condition){
     }
     else if (condition == "Drizzle" || condition == "Rain"){
         document.body.style.backgroundImage = "url('./assets/images/rain.jpg')";
+        makeItRain();
     }
     else if (condition == "Thunderstorm"){
         document.body.style.backgroundImage = "url('./assets/images/thunder.jpg')";
@@ -127,7 +128,7 @@ function addPastCity(){
     //added event listeners for each city button that was created
     var cityBtn = document.querySelectorAll(".btn-city");
     cityBtn.forEach(function(cityBtn) {
-        cityBtn.addEventListener("click", function(){
+        cityBtn.addEventListener("click", function(){ 
             var clickedCity = this.textContent;
             searchWeatherApi(clickedCity);
         })
@@ -148,5 +149,24 @@ function init(){
 }
 
 init();
+
+// Rain animation function
+function makeItRain () {
+    window.addEventListener("load", function () {
+        var newEl = document.createElement("div");
+        newEl.classList.add("rainy");
+        document.getElementById("load").appendChild(newEl);
+        var fps, dup, x, y;
+        dup = document.getElementById("load").innerHTML;
+        document.getElementById("load").innerHTML = dup.repeat(2);
+        fps = document.getElementById("load").children;
+        setInterval(function () {
+            x = document.documentElement.clientWidth -1, y = document.documentElement.clientHeight - 100;
+            for (var i=0; i < fps.length; i++) {
+                fps[i].setAttribute("style", "position:absolute; height: 100px; width: 1px; left:" + Math.random() * x + "px;top:" + Math.random() * + y + "px;");
+            }
+        }, 1)
+    };
+});
 
 

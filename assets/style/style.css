@@ -1,11 +1,16 @@
-
+* {
+    color: white;
+    background-color: black;
+}
 .title {
     display: flex;
     justify-content: center;
-
 }
 
 .city-form{
     align-items: center;
 }
 
+.rainy {
+    background: white;
+}
