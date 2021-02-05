@@ -23,7 +23,6 @@ function printCurrentWeather(result) {
     currentWeatherEl.setAttribute("src", iconLoc)
     console.log(currentWeatherCondition);
     changeBackground(currentWeatherCondition);
-    searchMusicAPI(currentWeatherCondition);
 
     return currentWeatherCondition
 }
@@ -106,22 +105,30 @@ function searchMusicAPI(condition){
 }
 
 function changeBackground(condition){
+    var weatherCondition;
 
     if (condition == "Clear" || condition == "Clouds"){
         document.body.style.backgroundImage = "url('./assets/images/sun.jpg')";
+        weatherCondition = "Sunny";
     }
     else if (condition == "Drizzle" || condition == "Rain"){
         document.body.style.backgroundImage = "url('./assets/images/rain.jpg')";
+        weatherCondition = "Rainy";
     }
     else if (condition == "Thunderstorm"){
         document.body.style.backgroundImage = "url('./assets/images/thunder.jpg')";
+        weatherCondition = "Thunderstorm";
     }
     else if (condition == "Snow") {
         document.body.style.backgroundImage = "url('./assets/images/snow.jpg')";
+        weatherCondition = "Snow";
     }
     else{
         document.body.style.backgroundImage = "url('./assets/images/fog.jpg')";
+        weatherCondition = "Hazy";
     }
+
+    searchMusicAPI(weatherCondition);
 }
 
 //Form Code
