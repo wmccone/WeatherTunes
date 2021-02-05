@@ -5,7 +5,14 @@
 
 }
 
+body {
+    background-repeat: no-repeat;
+    background-size: cover;  
+}
+
 .city-form{
     align-items: center;
 }
+
+
 
