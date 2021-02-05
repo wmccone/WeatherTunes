@@ -9,8 +9,7 @@
     <link href="./assets/style/style.css" rel="stylesheet">
 </head>
 
-<body >
-    <section id="background"></section>
+<body>
     <section id="load"></section>
     <header>
         <h1 class="title">Weather Tunes</h1>
@@ -20,7 +19,6 @@
             <main class="col-md-9">
                 <div class="row py-4">
                     <div class="card p-3">
-                        // Feel free to change any of this HTML code to fit your JS APP
                         <div id="current-city-weather" class="col-md-6">
                             <h3><span id="currentcity">Here's the Weather in your CITY!</span><span id="currentdate"></span><img id="currentweather" src=""></img></h3>
                             <ul class="list-group list-group-flush collection">
@@ -31,26 +29,13 @@
                                     <span id="cur-humid"></span>
                                 </li>
                                 <li class="list-group-item">
-                                   <span id="cur-wndspeed"></span>
+                                    <span id="cur-wndspeed"></span>
                                 </li>
                             </ul>
                         </div>
-                        // Feel free to change any of this HTML code to fit your JS APP
-                        <div id="current-city-weather" class="col-md-6">
-                            <h3>Here is the playlist for your PARTY!<span id="currentcity"></span></img></h3>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    Party ANTHEM 1
-                                </li>
-                                <li class="list-group-item">
-                                    Party ANTHEM 2
-                                </li>
-                                <li class="list-group-item">
-                                    Party ANTHEM 3
-                                </li>
-                                <li class="list-group-item">
-                                    PARTY ANTHEM 4
-                                </li>
+                        <div id="playlist" class="col-md-6">
+                            <h3>Here is the playlist for your study session.</h3>
+                            <iframe class="currentsong" width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
             </main>
@@ -58,10 +43,9 @@
 
             </aside>
         </div>
-        
+
         <div class="row gx-5">
             <div class="container">
-                // Feel free to change any of this HTML code to fit your JS APP
                 <div id="city-form" class="py-4">
                     <h2>Search for a City:</h2>
                     <form class="d-flex">
@@ -77,7 +61,10 @@
             </div>
         </div>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://connect.soundcloud.com/sdk/sdk-3.3.2.js"></script>
+    <script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 

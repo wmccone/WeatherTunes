@@ -1,6 +1,5 @@
-* {
-    color: white;
-    background-color: black;
+html {
+    background-size: cover;
 }
 .title {
     display: flex;
