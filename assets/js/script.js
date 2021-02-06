@@ -64,8 +64,10 @@ function searchWeatherApi(query) {
 //Music APP Code
 var videoControlsEl = document.querySelector("#video-controls")
 var musicWidgetEl = document.querySelector("iframe");
-var googopener = "AIzaSyCuCuNrKJ-khdNpUF9CS5Z64oMcP-pFtGM";
+
+var googopener = "AIzaSyC6AjZrA1QFsATo8QhRRXE2stCcwCIwomc";
 var musicObject = []
+
 // create a function to update the music to the page
 function printMusic(results) {
     console.log("results", results);
