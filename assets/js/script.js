@@ -100,7 +100,7 @@ function searchMusicAPI(condition) {
     //fetches the first 5 video results for weather condition + lofi
     var youTubeFetch = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q="+condition+"%20lofi%20mix&key=" + googopener
 
-    fetch(youTubeFetch)
+    // fetch(youTubeFetch)
         .then(function (response) {
             // If API does not respond throw up an error
             if (!response.ok) {
@@ -130,9 +130,11 @@ function searchMusicAPI(condition) {
             console.error(error);
         });
 }
-
+document.body.style.backgroundImage = "url('./assets/images/clouds.jpg')"
 function changeBackground(condition) {
     var weatherCondition;
+
+    
 
     if (condition == "Clear" || condition == "Clouds") {
         document.body.style.backgroundImage = "url('./assets/images/sun.jpg')";
