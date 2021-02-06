@@ -51,72 +51,99 @@ function searchWeatherApi(query) {
             }
             //Once API repsonds print the conditions
             else {
-                printCurrentWeather(locationres) 
+                printCurrentWeather(locationres)
             }
         })
-    }
+        //Catches earlier response to throw up an error
+        .catch(function (error) {
+            console.error(error);
+        });
+}
 
 
 //Music APP Code
-
+var videoControlsEl = document.querySelector("#video-controls")
 var musicWidgetEl = document.querySelector("iframe");
+
 var googopener = "AIzaSyC6AjZrA1QFsATo8QhRRXE2stCcwCIwomc";
+var musicObject = []
+
 // create a function to update the music to the page
-function printMusic(results){
+function printMusic(results) {
     console.log("results", results);
     // pick a random video
     var itemNumber = Math.floor(Math.random() * Math.floor(results.items.length));
     //this will help pull the video ID for the first video in the search results
     var musicID = results.items[itemNumber].id.videoId;
-    var musicUrl = "https://www.youtube.com/embed/"+musicID;
+    var musicUrl = "https://www.youtube.com/embed/" + musicID;
     console.log(musicUrl);
     musicWidgetEl.setAttribute("src", musicUrl);
 }
-//Receive the weather condition into the fetch function
 
-function searchMusicAPI(condition){
+//Finish writing button
+function writeMusicControls(){
+    videoControlsEl.innerHTML = ""
 
-    //fetches the first 5 video results for weather condition + lofi
-    var soundCloudFetch = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelType=any&maxResults=5&order=relevance&q="+condition+"%20lofi&key="+googopener
-
-    // fetch(soundCloudFetch)
-    .then(function (response) {
-        // If API does not respond throw up an error
-        if (!response.ok) {
-            throw response.json();
-        }
-
-        return response.json();
-    })
-    .then(function (music) {
-
-        // If location does not exist throw up a message to the user.
-        if (!music) {
-
-            console.log("no results found");
-            return
-        }
-        //Once API repsonds print the conditions
-        else {
-            console.log(music);
-            printMusic(music);
-        }
+    var nextButton = document.createElement("button")
+    nextButton.setAttribute("id", "btn-next");
+    nextButton.textContent = "Play me another";
+    videoControlsEl.appendChild(nextButton)
+    nextButton.addEventListener("click",function () {
+        printMusic(musicObject)
     })
 }
 
-function changeBackground(condition){
+//Receive the weather condition into the fetch function
+
+function searchMusicAPI(condition) {
+
+    //fetches the first 5 video results for weather condition + lofi
+    var youTubeFetch = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q="+condition+"%20lofi%20mix&key=" + googopener
+
+    fetch(youTubeFetch)
+        .then(function (response) {
+            // If API does not respond throw up an error
+            if (!response.ok) {
+                throw response.json();
+            }
+            return response.json();
+        })
+        .then(function (music) {
+
+            // If location does not exist throw up a message to the user.
+            if (!music) {
+
+                console.log("no results found");
+                return
+            }
+            //Once API repsonds print the conditions
+            else {
+                console.log(music);
+                printMusic(music);
+                musicObject = music
+                writeMusicControls(music)
+                return musicObject
+
+            }
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
+}
+
+function changeBackground(condition) {
     var weatherCondition;
 
-    if (condition == "Clear" || condition == "Clouds"){
+    if (condition == "Clear" || condition == "Clouds") {
         document.body.style.backgroundImage = "url('./assets/images/sun.jpg')";
         weatherCondition = "Sunny";
     }
-    else if (condition == "Drizzle" || condition == "Rain"){
+    else if (condition == "Drizzle" || condition == "Rain") {
         document.body.style.backgroundImage = "url('./assets/images/rain.jpg')";
         weatherCondition = "Rainy";
         makeItRain();
     }
-    else if (condition == "Thunderstorm"){
+    else if (condition == "Thunderstorm") {
         document.body.style.backgroundImage = "url('./assets/images/thunder.jpg')";
         weatherCondition = "Thunderstorm";
         makeItRain();
@@ -127,7 +154,7 @@ function changeBackground(condition){
         setInterval(makeItSnow, 50);
         makeItSnow();
     }
-    else{
+    else {
         document.body.style.backgroundImage = "url('./assets/images/fog.jpg')";
         weatherCondition = "Hazy";
     }
@@ -144,13 +171,13 @@ var cityListEl = document.querySelector("#city-list");
 var pastCityNames = [];
 var cityName;
 
-submitBtn.addEventListener("click", function(event){
+submitBtn.addEventListener("click", function (event) {
 
     event.preventDefault();
     
     cityName = cityInput.value;
 
-    if(cityName != ""){
+    if (cityName != "") {
         // clears buttons 
         cityListEl.innerHTML = "";
         // add to array for storage
@@ -162,9 +189,9 @@ submitBtn.addEventListener("click", function(event){
 
 });
 
-function addPastCity(){
+function addPastCity() {
     // create buttons for each city thats been searched
-    for (var i = 0; i < pastCityNames.length ; i ++){
+    for (var i = 0; i < pastCityNames.length; i++) {
 
         var newCityEl = document.createElement("button");
         newCityEl.setAttribute("class", "btn-city");
@@ -189,14 +216,14 @@ function addPastCity(){
     })
 }
 
-function storeCities(){
+function storeCities() {
     localStorage.setItem("storedCities", JSON.stringify(pastCityNames));
 }
 
-function init(){
+function init() {
     var storedCities = JSON.parse(localStorage.getItem("storedCities"));
 
-    if(storedCities != null){
+    if (storedCities != null) {
         pastCityNames = storedCities;
         addPastCity();
     }
