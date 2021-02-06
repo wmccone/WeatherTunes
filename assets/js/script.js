@@ -64,7 +64,8 @@ function searchWeatherApi(query) {
 //Music APP Code
 var videoControlsEl = document.querySelector("#video-controls")
 var musicWidgetEl = document.querySelector("iframe");
-var googopener = "AIzaSyAb9dAwTdMAi7MJtXWXB7L1536q-F72RTk";
+var googopener = "AIzaSyCuCuNrKJ-khdNpUF9CS5Z64oMcP-pFtGM";
+var musicObject = []
 // create a function to update the music to the page
 function printMusic(results) {
     console.log("results", results);
@@ -78,15 +79,15 @@ function printMusic(results) {
 }
 
 //Finish writing button
-function writeMusicControls(object){
+function writeMusicControls(){
     videoControlsEl.innerHTML = ""
 
     var nextButton = document.createElement("button")
     nextButton.setAttribute("id", "btn-next");
     nextButton.textContent = "Play me another";
     videoControlsEl.appendChild(nextButton)
-    nextButton.addEventListener("click",function (object) {
-        printMusic(object)
+    nextButton.addEventListener("click",function () {
+        printMusic(musicObject)
     })
 }
 
@@ -118,7 +119,10 @@ function searchMusicAPI(condition) {
             else {
                 console.log(music);
                 printMusic(music);
+                musicObject = music
                 writeMusicControls(music)
+                return musicObject
+
             }
         })
         .catch(function (error) {
