@@ -200,8 +200,7 @@ function init(){
 init();
 
 // Rain animation function
-// function makeItRain () {
-    // window.addEventListener("load", 
+
 function makeItRain () {
         var newEl = document.createElement("div");
         newEl.classList.add("rainy");
