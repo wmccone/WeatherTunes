@@ -114,7 +114,6 @@ function searchMusicAPI(condition) {
             if (!response.ok) {
                 throw response.json();
             }
-
             return response.json();
         })
         .then(function (music) {
@@ -138,8 +137,10 @@ function searchMusicAPI(condition) {
         .catch(function (error) {
             console.error(error);
         });
-
 }
+
+// Set main background image
+document.body.style.backgroundImage = "url('./assets/images/clouds.jpg')"
 
 function changeBackground(condition) {
     var weatherCondition;
