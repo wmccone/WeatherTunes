@@ -60,7 +60,7 @@ function searchWeatherApi(query) {
 //Music APP Code
 
 var musicWidgetEl = document.querySelector("iframe");
-var googopener = "AIzaSyAb9dAwTdMAi7MJtXWXB7L1536q-F72RTk";
+var googopener = "AIzaSyC6AjZrA1QFsATo8QhRRXE2stCcwCIwomc";
 // create a function to update the music to the page
 function printMusic(results){
     console.log("results", results);
