@@ -35,7 +35,15 @@ function searchWeatherApi(query) {
     fetch(locationURL)
         .then(function (response) {
             // If API does not respond throw up an error
-            if (!response.ok) {
+            if (response.status === 404){
+                console.log("no city found")
+                currentCityName.textContent = "City not found, please re-enter city"
+                pastCityNames.pop();
+                addPastCity();
+                return
+            }
+            
+            else if (!response.ok) {
                 throw response.json();
             }
 
@@ -191,6 +199,7 @@ submitBtn.addEventListener("click", function (event) {
 
 });
 
+//function will write the city Array to the page
 function addPastCity() {
     // create buttons for each city thats been searched
     for (var i = 0; i < pastCityNames.length; i++) {
@@ -204,7 +213,7 @@ function addPastCity() {
         cityListEl.append(newCityEl);
         cityListEl.append(newLineEl);
     }
-
+    //Call the local storage function
     storeCities();
 
     //added event listeners for each city button that was created
@@ -217,7 +226,7 @@ function addPastCity() {
         })
     })
 }
-
+//Function will add cities to local storage
 function storeCities() {
     localStorage.setItem("storedCities", JSON.stringify(pastCityNames));
 }
