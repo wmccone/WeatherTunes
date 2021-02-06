@@ -1,8 +1,10 @@
+html {
+    background-size: cover;
+}
 
 .title {
     display: flex;
     justify-content: center;
-
 }
 
 body {
@@ -14,5 +16,32 @@ body {
     align-items: center;
 }
 
+.rainy {
+    background: white;
+}
 
+.fa-snowflake {
+    color: white;
+    animation: fall 5s linear forwards;
+    position: absolute;
+    top: -15px;
+}
 
+#hide {
+    visibility: visible;
+}
+
+.list-group-item {
+    font-size: 30px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(105vh);
+    }
+}
