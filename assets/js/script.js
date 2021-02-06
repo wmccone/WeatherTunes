@@ -137,14 +137,18 @@ function changeBackground(condition) {
     else if (condition == "Drizzle" || condition == "Rain") {
         document.body.style.backgroundImage = "url('./assets/images/rain.jpg')";
         weatherCondition = "Rainy";
+        makeItRain();
     }
     else if (condition == "Thunderstorm") {
         document.body.style.backgroundImage = "url('./assets/images/thunder.jpg')";
         weatherCondition = "Thunderstorm";
+        makeItRain();
     }
     else if (condition == "Snow") {
         document.body.style.backgroundImage = "url('./assets/images/snow.jpg')";
         weatherCondition = "Snow";
+        setInterval(makeItSnow, 50);
+        makeItSnow();
     }
     else {
         document.body.style.backgroundImage = "url('./assets/images/fog.jpg')";
@@ -166,7 +170,7 @@ var cityName;
 submitBtn.addEventListener("click", function (event) {
 
     event.preventDefault();
-
+    
     cityName = cityInput.value;
 
     if (cityName != "") {
@@ -175,7 +179,7 @@ submitBtn.addEventListener("click", function (event) {
         // add to array for storage
         pastCityNames.push(cityName);
         addPastCity();
-
+        document.getElementById("hide").setAttribute("style", "visibility: visible");
     }
     searchWeatherApi(cityName);
 
@@ -199,10 +203,11 @@ function addPastCity() {
 
     //added event listeners for each city button that was created
     var cityBtn = document.querySelectorAll(".btn-city");
-    cityBtn.forEach(function (cityBtn) {
-        cityBtn.addEventListener("click", function () {
+    cityBtn.forEach(function(cityBtn) {
+        cityBtn.addEventListener("click", function(){ 
             var clickedCity = this.textContent;
             searchWeatherApi(clickedCity);
+            document.getElementById("hide").setAttribute("style", "visibility: visible");
         })
     })
 }
@@ -222,4 +227,31 @@ function init() {
 
 init();
 
+// Rain animation function
+function makeItRain () {
+        var snowman = document.createElement("div");
+        snowman.classList.add("rainy");
+        document.getElementById("rain").appendChild(snowman);
+        var fps, dup, x, y;
+        dup = document.getElementById("rain").innerHTML;
+        document.getElementById("rain").innerHTML = dup.repeat(2);
+        fps = document.getElementById("rain").children;
+        setInterval(function () {
+            x = document.documentElement.clientWidth -1, y = document.documentElement.clientHeight - 100;
+            for (var i=0; i < fps.length; i++) {
+                fps[i].setAttribute("style", "position:absolute; height: 100px; width: 1px; left:" + Math.random() * x + "px;top:" + Math.random() * + y + "px;");
+            }
+        }, 1)
+    
+};
+
+// Snow animation function
+function makeItSnow () {
+    var snowing = document.createElement('i');
+    snowing.classList.add('fas');
+    snowing.classList.add('fa-snowflake');
+    snowing.style.left = Math.random() * window.innerWidth + 'px';
+    snowing.style.animationDuration = 4 + 's';
+    document.body.appendChild(snowing);
+}
 
