@@ -7,35 +7,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>WeatherTunes</title>
     <link href="./assets/style/style.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/25ceb1e3ec.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <section id="load"></section>
+    <section id="rain"></section>
+    <section id="snow"></section>
     <header>
         <h1 class="title">Weather Tunes</h1>
     </header>
     <div class="container p-0">
-        <div class="row gx-5">
-            <main class="col-md-9">
+        <div class="row s-5">
+            <main class="col-md-9" id="hide">
                 <div class="row py-4">
-                    <div class="card p-3">
-                        <div id="current-city-weather" class="col-md-6">
+                    <div class="col p-3">
+                        <div id="current-city-weather" class="col-md-6 center-align">
                             <h3><span id="currentcity">Here's the Weather in your CITY!</span><span id="currentdate"></span><img id="currentweather" src=""></img></h3>
-                            <ul class="list-group list-group-flush collection">
-                                <li class="list-group-item collection-item">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item card blue lighten-3 card-content white-text">
                                     <span id="cur-temp"></span>
                                 </li>
-                                <li class="list-group-item collection-item">
+                                <li class="list-group-item card red lighten-3 card-content white-text">
                                     <span id="cur-humid"></span>
                                 </li>
-                                <li class="list-group-item">
+                                <li class="list-group-item card green lighten-3 card-content white-text">
                                     <span id="cur-wndspeed"></span>
                                 </li>
                             </ul>
                         </div>
-                        <div id="playlist" class="col-md-6">
-                            <h3>Here is the playlist for your study session.</h3>
-                            <iframe class="currentsong" width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div id="playlist" class="col-md-6 center-align">
+                                <h3>Here is the playlist for your study session.</h3>
+                                <iframe class="currentsong" width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
             </main>
@@ -46,7 +48,7 @@
 
         <div class="row gx-5">
             <div class="container">
-                <div id="city-form" class="py-4">
+                <div id="city-form" class="py-4 center-align">
                     <h2>Search for a City:</h2>
                     <form class="d-flex">
                         <input id="city-input" class="form-control me-2" type="search" placeholder="Search"
@@ -54,7 +56,7 @@
                         <button class="btn btn-submit btn-outline-success" type="submit">Search</button>
                 </div>
                 <div>
-                    <div id="city-list" class="list-group">
+                    <div id="city-list" class="list-group center-align chip">
 
                     </div>
                 </div>
