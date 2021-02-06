@@ -1,5 +1,8 @@
 html {
     background-size: cover;
+    font-family: 'Grandstander', cursive;
+    color: white;
+    text-shadow: -4px 0 pink, 0 3px pink, 4px 0 pink, 0 -3px pink;
 }
 
 .title {

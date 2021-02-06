@@ -79,7 +79,7 @@ function searchMusicAPI(condition){
     //fetches the first 5 video results for weather condition + lofi
     var soundCloudFetch = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelType=any&maxResults=5&order=relevance&q="+condition+"%20lofi&key="+googopener
 
-    fetch(soundCloudFetch)
+    // fetch(soundCloudFetch)
     .then(function (response) {
         // If API does not respond throw up an error
         if (!response.ok) {
