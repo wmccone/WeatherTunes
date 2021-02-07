@@ -131,8 +131,12 @@ function searchMusicAPI(condition) {
         });
 }
 
-// Set main background image
-document.body.style.backgroundImage = "url('./assets/images/clouds.jpg')"
+// Sets main background image
+var mainWallpaper = document.body.style["background-image"] = "url('./assets/images/wavy.jpg')";
+console.log(mainWallpaper);
+var body = document.querySelector('body');
+body.setAttribute("class", 'cloudPic');
+
 
 function changeBackground(condition) {
     var weatherCondition;

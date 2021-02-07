@@ -1,8 +1,10 @@
 html {
+    min-height: 100%;
+    background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Grandstander', cursive;
     color: turquoise;
-    text-shadow: -3px 0 darkblue, 0 2px darkblue, 2px 0 darkblue, 0 -3px darkblue;
+    text-shadow: -3px 0 black, 0 2px black, 2px 0 black, 0 -3px black;
 }
 
 .title {
@@ -11,8 +13,19 @@ html {
 }
 
 body {
+    min-height: 100%;
     background-repeat: no-repeat;
     background-size: cover;  
+}
+
+.cloudPic {
+    min-height: 100%;
+    min-width: 1024px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 .city-form{
@@ -35,7 +48,9 @@ body {
 }
 
 .list-group-item {
-    font-size: 30px;
+    font-size: 45px;
+    color: black;
+    text-shadow: none;
 }
 
 .container {
