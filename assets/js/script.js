@@ -35,11 +35,21 @@ function searchWeatherApi(query) {
     fetch(locationURL)
         .then(function (response) {
             // If API does not respond throw up an error
-            if (!response.ok) {
+            if (response.status === 404){
+                console.log("no city found")
+                //This will tell the user to enter their info again if they use an invalit input for the weather fetch.
+                currentCityName.textContent = "City not found, please re-enter city"
+                //This will remove their invalid input from the storage array for the cities
+                pastCityNames.pop();
+                addPastCity();
+                return
+            }
+            
+            else if (!response.ok) {
                 throw response.json();
             }
-
             return response.json();
+
         })
         .then(function (locationres) {
 
@@ -65,29 +75,32 @@ function searchWeatherApi(query) {
 var videoControlsEl = document.querySelector("#video-controls")
 var musicWidgetEl = document.querySelector("iframe");
 
-var googopener = "AIzaSyC6AjZrA1QFsATo8QhRRXE2stCcwCIwomc";
+var googopener = "AIzaSyCuCuNrKJ-khdNpUF9CS5Z64oMcP-pFtGM";
 var musicObject = []
 
 // create a function to update the music to the page
 function printMusic(results) {
     console.log("results", results);
-    // pick a random video
+    // pick a random video from the object
     var itemNumber = Math.floor(Math.random() * Math.floor(results.items.length));
-    //this will help pull the video ID for the first video in the search results
+    //this will help pull the video ID for the random video
     var musicID = results.items[itemNumber].id.videoId;
+    // this will create the video link and add it to the iframe on the html
     var musicUrl = "https://www.youtube.com/embed/" + musicID;
     console.log(musicUrl);
     musicWidgetEl.setAttribute("src", musicUrl);
 }
 
-//Finish writing button
+//This function will write a button that goes to a new video
 function writeMusicControls(){
+    //Clears the button section before writing it again
     videoControlsEl.innerHTML = ""
-
+    //Adds the button to the page
     var nextButton = document.createElement("button")
     nextButton.setAttribute("id", "btn-next");
     nextButton.textContent = "Play me another";
     videoControlsEl.appendChild(nextButton)
+    //Assigns the button to reprint the music on print
     nextButton.addEventListener("click",function () {
         printMusic(musicObject)
     })
@@ -97,8 +110,8 @@ function writeMusicControls(){
 
 function searchMusicAPI(condition) {
 
-    //fetches the first 5 video results for weather condition + lofi
-    var youTubeFetch = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q="+condition+"%20lofi%20mix&key=" + googopener
+    //fetches the first 10 video results for weather condition + lofi
+    var youTubeFetch = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q="+condition+"%20lofi%20mix&key=" + googopener
 
     fetch(youTubeFetch)
         .then(function (response) {
@@ -119,9 +132,13 @@ function searchMusicAPI(condition) {
             //Once API repsonds print the conditions
             else {
                 console.log(music);
+                //Adds the music link to the iframe
                 printMusic(music);
+                //Sets the music object to a variable
                 musicObject = music
+                //Starts writing the music controls to the page
                 writeMusicControls(music)
+                //Sends the music object to the global scope for use in writing the music controls.
                 return musicObject
 
             }
@@ -175,41 +192,73 @@ var submitBtn = document.querySelector(".btn-submit");
 //input value is assigned a variable
 var cityInput = document.querySelector("input");
 var cityListEl = document.querySelector("#city-list");
+//This will be the Array used for storing city names to the local storage
 var pastCityNames = [];
+//This variable will store the input from the form
 var cityName;
 
 submitBtn.addEventListener("click", function (event) {
 
     event.preventDefault();
-    
+    //Stores the form input
     cityName = cityInput.value;
-
-    if (cityName != "") {
+    //converts city name to lowercase to make inputs uniform
+    cityName = cityName.toLowerCase()
+    //If array already contains the city remove the duplicate from the array.
+    if (pastCityNames.includes(cityName)) {
+        //finds the index of the duplicate in the array
+        var cityindex = pastCityNames.indexOf(cityName)
+        //removes the city in the array
+        pastCityNames.splice(cityindex, 1)
+        //Adds the new input at the top of the array
+        pastCityNames.unshift(cityName)
+        cityListEl.innerHTML = "";
+        addPastCity();
+    }
+    //If user has 10 recent results remove the last one from the list and add the new one
+    else if (cityName != "" && pastCityNames.length === 10) {
+        //Removes the last index of the array
+        pastCityNames.pop()
+        //Adds the new input to the array
+        pastCityNames.unshift(cityName)
+        cityListEl.innerHTML = "";
+        addPastCity();
+    }
+    //Will only accept an input if one exists in the form and the storage is less than 10 in length
+    else if (cityName != "" && pastCityNames.length < 10) {
         // clears buttons 
         cityListEl.innerHTML = "";
         // add to array for storage
-        pastCityNames.push(cityName);
+        pastCityNames.unshift(cityName);
         addPastCity();
-        document.getElementById("hide").setAttribute("style", "visibility: visible");
     }
+    
+    document.getElementById("hide").setAttribute("style", "visibility: visible");
     searchWeatherApi(cityName);
 
 });
 
+//function will capitalize the first letter of the words printed
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+//function will write the city Array to the page
 function addPastCity() {
     // create buttons for each city thats been searched
     for (var i = 0; i < pastCityNames.length; i++) {
 
         var newCityEl = document.createElement("button");
         newCityEl.setAttribute("class", "btn-city");
-        newCityEl.textContent = pastCityNames[i];
+        var city = capitalizeFirstLetter(pastCityNames[i])
+        newCityEl.textContent = city;
 
         var newLineEl = document.createElement("br")
 
         cityListEl.append(newCityEl);
         cityListEl.append(newLineEl);
     }
-
+    //Call the local storage function
     storeCities();
 
     //added event listeners for each city button that was created
@@ -218,11 +267,20 @@ function addPastCity() {
         cityBtn.addEventListener("click", function(){ 
             var clickedCity = this.textContent;
             searchWeatherApi(clickedCity);
+            //Finds the index of the city clicked in the storage array
+            var arrayLoc = pastCityNames.indexOf(clickedCity)
+            //removes the index where the city was
+            pastCityNames.splice(arrayLoc, 1)
+            //adds the city back into the top of the array
+            pastCityNames.unshift(clickedCity)
+            //rewrites the buttons on the page
+            cityListEl.innerHTML = "";
+            addPastCity();
             document.getElementById("hide").setAttribute("style", "visibility: visible");
         })
     })
 }
-
+//Function will add cities to local storage
 function storeCities() {
     localStorage.setItem("storedCities", JSON.stringify(pastCityNames));
 }
@@ -232,7 +290,10 @@ function init() {
 
     if (storedCities != null) {
         pastCityNames = storedCities;
+        //Will pull the buttons onto the page on load
         addPastCity();
+        //Will pull the last city searched onto the page for the weather
+        searchWeatherApi(storedCities[0])
     }
 }
 
