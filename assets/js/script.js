@@ -113,7 +113,7 @@ function searchMusicAPI(condition) {
     //fetches the first 10 video results for weather condition + lofi
     var youTubeFetch = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q="+condition+"%20lofi%20mix&key=" + googopener
 
-    fetch(youTubeFetch)
+  //  fetch(youTubeFetch)
         .then(function (response) {
             // If API does not respond throw up an error
             if (!response.ok) {
@@ -153,7 +153,6 @@ var mainWallpaper = document.body.style["background-image"] = "url('./assets/ima
 console.log(mainWallpaper);
 var body = document.querySelector('body');
 body.setAttribute("class", 'cloudPic');
-
 
 function changeBackground(condition) {
     var weatherCondition;
@@ -249,7 +248,7 @@ function addPastCity() {
     for (var i = 0; i < pastCityNames.length; i++) {
 
         var newCityEl = document.createElement("button");
-        newCityEl.setAttribute("class", "btn-city");
+        newCityEl.setAttribute("class", "btn-city waves-effect waves-light btn indigo lighten-3");
         var city = capitalizeFirstLetter(pastCityNames[i])
         newCityEl.textContent = city;
 

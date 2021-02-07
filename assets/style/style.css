@@ -18,6 +18,10 @@ body {
     background-size: cover;  
 }
 
+.btn-city {
+    margin: 5px;
+}
+
 .cloudPic {
     min-height: 100%;
     min-width: 1024px;
