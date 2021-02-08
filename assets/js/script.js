@@ -113,7 +113,7 @@ function searchMusicAPI(condition) {
     //fetches the first 10 video results for weather condition + lofi
     var youTubeFetch = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q="+condition+"%20lofi%20mix&key=" + googopener
 
-  //  fetch(youTubeFetch)
+    fetch(youTubeFetch)
         .then(function (response) {
             // If API does not respond throw up an error
             if (!response.ok) {
@@ -154,12 +154,15 @@ console.log(mainWallpaper);
 var body = document.querySelector('body');
 body.setAttribute("class", 'cloudPic');
 
+var weatherCondition;
 function changeBackground(condition) {
-    var weatherCondition;
+    
 
     if (condition == "Clear" || condition == "Clouds") {
         document.body.style.backgroundImage = "url('./assets/images/sun.jpg')";
         weatherCondition = "Sunny";
+        document.getElementById("rain").innerHTML = "";
+        ;
     }
     else if (condition == "Drizzle" || condition == "Rain") {
         document.body.style.backgroundImage = "url('./assets/images/rain.jpg')";
@@ -174,12 +177,14 @@ function changeBackground(condition) {
     else if (condition == "Snow") {
         document.body.style.backgroundImage = "url('./assets/images/snow.jpg')";
         weatherCondition = "Snow";
+        document.getElementById("rain").innerHTML = "";
         setInterval(makeItSnow, 50);
         makeItSnow();
     }
     else {
         document.body.style.backgroundImage = "url('./assets/images/fog.jpg')";
         weatherCondition = "Hazy";
+        document.getElementById("rain").innerHTML = "";
     }
 
     searchMusicAPI(weatherCondition);
@@ -275,7 +280,6 @@ function addPastCity() {
             //rewrites the buttons on the page
             cityListEl.innerHTML = "";
             addPastCity();
-            document.getElementById("hide").setAttribute("style", "visibility: visible");
         })
     })
 }
@@ -300,29 +304,31 @@ init();
 
 // Rain animation function
 function makeItRain () {
-        var snowman = document.createElement("div");
-        snowman.classList.add("rainy");
-        document.getElementById("rain").appendChild(snowman);
-        var fps, dup, x, y;
-        dup = document.getElementById("rain").innerHTML;
-        document.getElementById("rain").innerHTML = dup.repeat(2);
-        fps = document.getElementById("rain").children;
-        setInterval(function () {
-            x = document.documentElement.clientWidth -1, y = document.documentElement.clientHeight - 100;
-            for (var i=0; i < fps.length; i++) {
-                fps[i].setAttribute("style", "position:absolute; height: 100px; width: 1px; left:" + Math.random() * x + "px;top:" + Math.random() * + y + "px;");
-            }
-        }, 1)
-    
+    var zrain = document.createElement("div");
+    zrain.classList.add("rainy");
+    document.getElementById("rain").appendChild(zrain);
+    var fps, dup, x, y;
+    dup = document.getElementById("rain").innerHTML;
+    document.getElementById("rain").innerHTML = dup.repeat(2);
+    fps = document.getElementById("rain").children;
+    setInterval(function () {
+        x = document.documentElement.clientWidth -1, y = document.documentElement.clientHeight - 100;
+        for (var i=0; i < fps.length; i++) {
+            fps[i].setAttribute("style", "position:absolute; height: 100px; width: 1px; left:" + Math.random() * x + "px;top:" + Math.random() * + y + "px;");
+        }
+    }, 1)
 };
 
 // Snow animation function
 function makeItSnow () {
-    var snowing = document.createElement('i');
-    snowing.classList.add('fas');
-    snowing.classList.add('fa-snowflake');
-    snowing.style.left = Math.random() * window.innerWidth + 'px';
-    snowing.style.animationDuration = 4 + 's';
-    document.body.appendChild(snowing);
+    if (weatherCondition === "Snow") {
+        var snowing = document.createElement('i');
+        snowing.classList.add('fas');
+        snowing.classList.add('fa-snowflake');
+        snowing.style.left = Math.random() * window.innerWidth + 'px';
+        snowing.style.animationDuration = 4 + 's';
+        document.body.appendChild(snowing);
+} else {
+    snowing = "";
 }
-
+};

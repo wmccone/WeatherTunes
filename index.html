@@ -15,66 +15,46 @@
     <section id="rain"></section>
     <section id="snow"></section>
     <header>
-        <h1 class="title">Weather Tunes</h1>
+        <h1 class="title center-align">Weather Tunes</h1>
     </header>
     <div class="container p-0">
-        <div class="row s-5">
-            <main class="col-md-9" id="hide">
-                <div class="row py-4">
-                    <div class="col p-3">
-                        <div id="current-city-weather" class="col-md-6 center-align">
-                            <h3><span id="currentcity">Here's the Weather in your CITY!</span><span id="currentdate"></span><img id="currentweather" src=""></img></h3>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item card blue lighten-3 card-content">
-                                    <span id="cur-temp"></span>
-                                </li>
-                                <li class="list-group-item card red lighten-3 card-content">
-                                    <span id="cur-humid"></span>
-                                </li>
-                                <li class="list-group-item card green lighten-3 card-content">
-                                    <span id="cur-wndspeed"></span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="playlist" class="col-md-6 center-align">
-                            <h3>Here is the playlist for your study session.</h3>
-                            <div id="video-controls">
-                                
-                            </div>
-                            <iframe class="currentsong" width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </main>
-                <aside class="col-md-3 ps-0">
-                    
-                </aside>
-            </div>
-            
-            <div class="row gx-5">
-                <div class="container">
-                    <div id="city-form" class="py-4 center-align">
-                        <h2>Search for a City:</h2>
-                        <form class="d-flex">
-                            <input id="city-input" class="form-control me-2" type="search" placeholder="Search"
-                            aria-label="Search">
-                            <button class="btn btn-submit btn-outline-success" type="submit">Search</button>
-                    </div>
-                <div class="container">
-                    <div class="col s-12">
-                        <div>
-                            <div id="city-list" class="list-group center-align">
-                                
-                            </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="row s-12">
+            <div class="row gx-12">
+                <div id="city-form" class="py-4 center-align">
+                    <h2>Search for a City:</h2>
+                    <form class="d-flex">
+                        <input id="city-input" class="form-control me-2" type="search" placeholder="Search"
+                        aria-label="Search">
+                        <button class="btn btn-submit btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+                <div id="city-list" class="list-group">       
                 </div>
             </div>
-            
-            <script src="https://kit.fontawesome.com/25ceb1e3ec.js" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-            <script src="./assets/js/script.js"></script>
-        </body>
-        
-        </html>
+            <div id="current-city-weather" class="col-md-6 center-align">
+                <h3><span id="currentcity">Here's the Weather in your CITY!</span><span id="currentdate"></span><img id="currentweather" src=""></img></h3>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item card blue lighten-3 card-content">
+                        <span id="cur-temp"></span>
+                    </li>
+                    <li class="list-group-item card red lighten-3 card-content">
+                        <span id="cur-humid"></span>
+                    </li>
+                    <li class="list-group-item card green lighten-3 card-content">
+                        <span id="cur-wndspeed"></span>
+                    </li>
+                </ul>
+            </div>
+            <div id="playlist" class="col-md-6 center-align">
+                <h3>Here is the playlist for your study session.</h3>
+                <div id="video-controls">
+                </div>
+                <iframe class="currentsong" width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/25ceb1e3ec.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
