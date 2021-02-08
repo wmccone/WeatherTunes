@@ -148,15 +148,16 @@ function searchMusicAPI(condition) {
         });
 }
 
+
+
+
+var weatherCondition;
+function changeBackground(condition) {
 // Sets main background image
 var mainWallpaper = document.body.style["background-image"] = "url('./assets/images/wavy.jpg')";
 console.log(mainWallpaper);
 var body = document.querySelector('body');
-body.setAttribute("class", 'cloudPic');
-
-var weatherCondition;
-function changeBackground(condition) {
-    
+body.setAttribute("class", 'cloudPic');    
 
     if (condition == "Clear" || condition == "Clouds") {
         document.body.style.backgroundImage = "url('./assets/images/sun.jpg')";
@@ -237,7 +238,6 @@ submitBtn.addEventListener("click", function (event) {
         addPastCity();
     }
     
-    document.getElementById("hide").setAttribute("style", "visibility: visible");
     searchWeatherApi(cityName);
 
 });
