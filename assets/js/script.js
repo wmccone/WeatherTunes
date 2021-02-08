@@ -97,7 +97,7 @@ function writeMusicControls(){
     videoControlsEl.innerHTML = ""
     //Adds the button to the page
     var nextButton = document.createElement("button")
-    nextButton.setAttribute("id", "btn-next");
+    nextButton.setAttribute("class", "btn-next waves-effect waves-light btn indigo lighten-3");
     nextButton.textContent = "Play me another";
     videoControlsEl.appendChild(nextButton)
     //Assigns the button to reprint the music on print
@@ -148,15 +148,22 @@ function searchMusicAPI(condition) {
         });
 }
 
-// Set main background image
-document.body.style.backgroundImage = "url('./assets/images/clouds.jpg')"
 
+
+
+var weatherCondition;
 function changeBackground(condition) {
-    var weatherCondition;
+// Sets main background image
+var mainWallpaper = document.body.style["background-image"] = "url('./assets/images/wavy.jpg')";
+console.log(mainWallpaper);
+var body = document.querySelector('body');
+body.setAttribute("class", 'cloudPic');    
 
     if (condition == "Clear" || condition == "Clouds") {
         document.body.style.backgroundImage = "url('./assets/images/sun.jpg')";
         weatherCondition = "Sunny";
+        document.getElementById("rain").innerHTML = "";
+        ;
     }
     else if (condition == "Drizzle" || condition == "Rain") {
         document.body.style.backgroundImage = "url('./assets/images/rain.jpg')";
@@ -171,12 +178,14 @@ function changeBackground(condition) {
     else if (condition == "Snow") {
         document.body.style.backgroundImage = "url('./assets/images/snow.jpg')";
         weatherCondition = "Snow";
+        document.getElementById("rain").innerHTML = "";
         setInterval(makeItSnow, 50);
         makeItSnow();
     }
     else {
         document.body.style.backgroundImage = "url('./assets/images/fog.jpg')";
         weatherCondition = "Hazy";
+        document.getElementById("rain").innerHTML = "";
     }
 
     searchMusicAPI(weatherCondition);
@@ -229,7 +238,6 @@ submitBtn.addEventListener("click", function (event) {
         addPastCity();
     }
     
-    document.getElementById("hide").setAttribute("style", "visibility: visible");
     searchWeatherApi(cityName);
 
 });
@@ -245,7 +253,7 @@ function addPastCity() {
     for (var i = 0; i < pastCityNames.length; i++) {
 
         var newCityEl = document.createElement("button");
-        newCityEl.setAttribute("class", "btn-city");
+        newCityEl.setAttribute("class", "btn-city waves-effect waves-light btn indigo lighten-3");
         var city = capitalizeFirstLetter(pastCityNames[i])
         newCityEl.textContent = city;
 
@@ -272,7 +280,6 @@ function addPastCity() {
             //rewrites the buttons on the page
             cityListEl.innerHTML = "";
             addPastCity();
-            document.getElementById("hide").setAttribute("style", "visibility: visible");
         })
     })
 }
@@ -297,29 +304,31 @@ init();
 
 // Rain animation function
 function makeItRain () {
-        var snowman = document.createElement("div");
-        snowman.classList.add("rainy");
-        document.getElementById("rain").appendChild(snowman);
-        var fps, dup, x, y;
-        dup = document.getElementById("rain").innerHTML;
-        document.getElementById("rain").innerHTML = dup.repeat(2);
-        fps = document.getElementById("rain").children;
-        setInterval(function () {
-            x = document.documentElement.clientWidth -1, y = document.documentElement.clientHeight - 100;
-            for (var i=0; i < fps.length; i++) {
-                fps[i].setAttribute("style", "position:absolute; height: 100px; width: 1px; left:" + Math.random() * x + "px;top:" + Math.random() * + y + "px;");
-            }
-        }, 1)
-    
+    var zrain = document.createElement("div");
+    zrain.classList.add("rainy");
+    document.getElementById("rain").appendChild(zrain);
+    var fps, dup, x, y;
+    dup = document.getElementById("rain").innerHTML;
+    document.getElementById("rain").innerHTML = dup.repeat(2);
+    fps = document.getElementById("rain").children;
+    setInterval(function () {
+        x = document.documentElement.clientWidth -1, y = document.documentElement.clientHeight - 100;
+        for (var i=0; i < fps.length; i++) {
+            fps[i].setAttribute("style", "position:absolute; height: 100px; width: 1px; left:" + Math.random() * x + "px;top:" + Math.random() * + y + "px;");
+        }
+    }, 1)
 };
 
 // Snow animation function
 function makeItSnow () {
-    var snowing = document.createElement('i');
-    snowing.classList.add('fas');
-    snowing.classList.add('fa-snowflake');
-    snowing.style.left = Math.random() * window.innerWidth + 'px';
-    snowing.style.animationDuration = 4 + 's';
-    document.body.appendChild(snowing);
+    if (weatherCondition === "Snow") {
+        var snowing = document.createElement('i');
+        snowing.classList.add('fas');
+        snowing.classList.add('fa-snowflake');
+        snowing.style.left = Math.random() * window.innerWidth + 'px';
+        snowing.style.animationDuration = 4 + 's';
+        document.body.appendChild(snowing);
+} else {
+    snowing = "";
 }
-
+};
