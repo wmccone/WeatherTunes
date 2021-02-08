@@ -97,7 +97,7 @@ function writeMusicControls(){
     videoControlsEl.innerHTML = ""
     //Adds the button to the page
     var nextButton = document.createElement("button")
-    nextButton.setAttribute("id", "btn-next");
+    nextButton.setAttribute("class", "btn-next waves-effect waves-light btn indigo lighten-3");
     nextButton.textContent = "Play me another";
     videoControlsEl.appendChild(nextButton)
     //Assigns the button to reprint the music on print
