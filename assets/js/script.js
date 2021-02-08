@@ -40,7 +40,10 @@ function searchWeatherApi(query) {
                 //This will tell the user to enter their info again if they use an invalit input for the weather fetch.
                 currentCityName.textContent = "City not found, please re-enter city"
                 //This will remove their invalid input from the storage array for the cities
-                pastCityNames.pop();
+                var cityindex = pastCityNames.indexOf(cityName)
+                //removes the city in the array
+                pastCityNames.splice(cityindex, 1)
+                cityListEl.innerHTML = "";
                 addPastCity();
                 return
             }
