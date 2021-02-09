@@ -1,18 +1,35 @@
 html {
+    min-height: 100%;
+    background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Grandstander', cursive;
-    color: turquoise;
-    text-shadow: -3px 0 darkblue, 0 2px darkblue, 2px 0 darkblue, 0 -3px darkblue;
+    color: rgb(245, 94, 94);
+    text-shadow: -3px 0 black, 0 2px black, 2px 0 black, 0 -3px black;
 }
 
-.title {
+ .title {
     display: flex;
     justify-content: center;
-}
+} 
 
 body {
+    min-height: 100%;
     background-repeat: no-repeat;
     background-size: cover;  
+}
+
+.btn-city {
+    margin: 5px;
+}
+
+.cloudPic {
+    min-height: 100%;
+    min-width: 1024px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 .city-form{
@@ -25,22 +42,29 @@ body {
 
 .fa-snowflake {
     color: white;
-    animation: fall 5s linear forwards;
+    animation: fall linear forwards;
     position: absolute;
     top: -15px;
 }
 
-#hide {
-    visibility: visible;
-}
-
 .list-group-item {
-    font-size: 30px;
+    font-size: 45px;
+    color: black;
+    text-shadow: none;
 }
 
 .container {
     display: flex;
     flex-direction: row-reverse;
+}
+
+#city-input {
+    background-color: white;
+}
+
+#city-list {
+    display:flex;
+    flex-direction: row;
 }
 
 @keyframes fall {
