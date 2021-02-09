@@ -112,7 +112,7 @@ function showModal(){
         modal.style.display = "none";
         }
     } 
-
+    changeBackground("modal");
 }
 
 
@@ -220,6 +220,12 @@ function changeBackground(condition) {
         document.getElementById("rain").innerHTML = "";
         setInterval(makeItSnow, 50);
         makeItSnow();
+    }
+    else if(condition == "modal"){
+        document.body.style.backgroundImage = "url('./assets/images/wavy.jpg')";
+        weatherCondition = "modal";
+        makeItSnow(weatherCondition);
+        document.getElementById("rain").innerHTML = "";
     }
     else {
         document.body.style.backgroundImage = "url('./assets/images/fog.jpg')";
