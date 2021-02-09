@@ -18,9 +18,9 @@
         <h1 class="title center-align">Weather Tunes</h1>
     </header>
     <div class="container p-0">
-        <div class="row s-12">
-            <div class="row gx-12">
-                <div id="city-form" class="py-4 center-align">
+        <div class="row">
+            <div class="col s12">
+                <div id="city-form" class="center-align">
                     <h2>Search for a City:</h2>
                     <form class="d-flex">
                         <input id="city-input" class="form-control me-2" type="search" placeholder="Search"
@@ -31,25 +31,31 @@
                 <div id="city-list" class="list-group">       
                 </div>
             </div>
-            <div id="current-city-weather" class="col-md-6 center-align">
-                <h3><span id="currentcity">Here's the Weather in your CITY!</span><span id="currentdate"></span><img id="currentweather" src=""></img></h3>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item card blue lighten-3 card-content">
-                        <span id="cur-temp"></span>
-                    </li>
-                    <li class="list-group-item card red lighten-3 card-content">
-                        <span id="cur-humid"></span>
-                    </li>
-                    <li class="list-group-item card green lighten-3 card-content">
-                        <span id="cur-wndspeed"></span>
-                    </li>
-                </ul>
-            </div>
-            <div id="playlist" class="col-md-6 center-align">
-                <h3>Here is the playlist for your study session.</h3>
-                <div id="video-controls">
+        </div>
+        <div class="row">
+            <div class="col s6">
+                <div id="current-city-weather" class="col-md-6 center-align">
+                    <h3><span id="currentcity">Here's the Weather in your CITY!</span><span id="currentdate"></span><img id="currentweather" src=""></img></h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item card blue lighten-3 card-content">
+                            <span id="cur-temp"></span>
+                        </li>
+                        <li class="list-group-item card red lighten-3 card-content">
+                            <span id="cur-humid"></span>
+                        </li>
+                        <li class="list-group-item card green lighten-3 card-content">
+                            <span id="cur-wndspeed"></span>
+                        </li>
+                    </ul>
+                    </div>
                 </div>
-                <iframe class="currentsong" width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="col s6">
+                <div id="playlist" class="center-align">
+                    <h3>Here is the playlist for your study session.</h3>
+                    <div id="video-controls">
+                    </div>
+                    <iframe class="currentsong" width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
     </div>
