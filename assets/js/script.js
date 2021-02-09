@@ -287,12 +287,8 @@ function storeCities() {
 }
 
 function init() {
-
     // sets the intial wallpaper
     document.body.style.backgroundImage = "url('./assets/images/wavy.jpg')";
-    console.log(mainWallpaper);
-    var body = document.querySelector('body');
-    body.setAttribute("class", 'cloudPic');   
 
     var storedCities = JSON.parse(localStorage.getItem("storedCities"));
 
