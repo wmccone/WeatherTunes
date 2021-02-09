@@ -212,6 +212,7 @@ submitBtn.addEventListener("click", function (event) {
     cityName = cityInput.value;
     //converts city name to lowercase to make inputs uniform
     cityName = cityName.toLowerCase()
+    cityName = cityName.trim()
     //If array already contains the city remove the duplicate from the array.
     if (pastCityNames.includes(cityName)) {
         //finds the index of the duplicate in the array
