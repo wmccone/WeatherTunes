@@ -88,7 +88,7 @@ function searchWeatherApi(query) {
 var videoControlsEl = document.querySelector("#video-controls")
 var musicWidgetEl = document.querySelector("iframe");
 
-var googopener = "AIzaSyCuCuNrKJ-khdNpUF9CS5Z64oMcP-pFtGM";
+var googopener = "AIzaSyC6AjZrA1QFsATo8QhRRXE2stCcwCIwomc";
 var musicObject = []
 
 // create a function to update the music to the page
@@ -126,7 +126,7 @@ function searchMusicAPI(condition) {
     //fetches the first 10 video results for weather condition + lofi
     var youTubeFetch = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q="+condition+"%20lofi%20mix&key=" + googopener
 
-    fetch(youTubeFetch)
+      fetch(youTubeFetch)
         .then(function (response) {
             // If API does not respond throw up an error
             if (!response.ok) {
@@ -160,8 +160,7 @@ function searchMusicAPI(condition) {
             console.error(error);
         });
 }
-
-
+   
 
 
 var weatherCondition;
