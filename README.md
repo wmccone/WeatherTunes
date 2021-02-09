@@ -1,6 +1,7 @@
 # WeatherTunes
 This is an application collaboratively created in the UT-Austin Coding Bootcamp course.
 
+
 ## Description
 
 WeatherTunes is an application that curates a playlist based on the user entered city current weather condition.
@@ -12,6 +13,7 @@ The playlist was implemented using the server-side [YouTube API](https://develop
 Each valid city is stored into local storage and displayed as a new button on the page. This allows it to be clicked on again in the future and/or recalled when the page is refreshed. If a city is entered twice, it is only stored in local storage once. If the entered city is invalid, the user is given an error via a modal and returned to the initial home page.
 
 [Materialize](https://materializecss.com/) was the framework used to style the page.
+
 
 ## Table of Contents
 
