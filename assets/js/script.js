@@ -11,8 +11,13 @@ var currentWeatherEl = document.querySelector("#currentweather");
 var dateVar = moment().format('L');
 var apiKey = "86be0edea7b654b425b0a2a7b7fa2fe5";
 var currentWeatherCondition = "";
+var playlistTextEl = document.querySelector("#playlist-text");
 
 function printCurrentWeather(result) {
+    // show text elements
+    currentCityName.hidden = false;
+    playlistTextEl.hidden = false;
+
     currentWeatherCondition = result.weather[0].main
     currentCityName.textContent = result.name + ": "
     currentTempurature.textContent = "Temperature: " + result.main.temp + "°F"
@@ -289,6 +294,10 @@ function storeCities() {
 function init() {
     // sets the intial wallpaper
     document.body.style.backgroundImage = "url('./assets/images/wavy.jpg')";
+
+    //hide text elements
+    currentCityName.hidden = true;
+    playlistTextEl.hidden = true;
 
     var storedCities = JSON.parse(localStorage.getItem("storedCities"));
 
