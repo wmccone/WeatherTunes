@@ -10,11 +10,15 @@ var dateVar = moment().format('L');
 var apiKey = "86be0edea7b654b425b0a2a7b7fa2fe5";
 var currentWeatherCondition = "";
 var playlistTextEl = document.querySelector("#playlist-text");
+var showWeather = document.querySelector("#current-city-weather");
+var showPlaylist = document.querySelector("#playlist");
 
 function printCurrentWeather(result) {
     // show text elements
     currentCityName.hidden = false;
     playlistTextEl.hidden = false;
+    showWeather.hidden = false;
+    showPlaylist.hidden = false;
 
     //erases input text
     cityInput.value= "";
@@ -36,6 +40,7 @@ function printCurrentWeather(result) {
 
 // This function is going to search the Open Weather API for the fields associated with the city
 function searchWeatherApi(query) {
+
     var cityName = query
     var locationURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial" + "&appid=" + apiKey
 
@@ -47,11 +52,12 @@ function searchWeatherApi(query) {
                 //erases input text
                 cityInput.value= "";
                 //This will tell the user to enter their info again if they use an invalit input for the weather fetch.
-                currentCityName.textContent = "City not found, please re-enter city"
+                currentCityName.textContent = "City not found, please re-enter city";
+                showModal();
                 //This will remove their invalid input from the storage array for the cities
-                var cityindex = pastCityNames.indexOf(cityName)
+                var cityindex = pastCityNames.indexOf(cityName);
                 //removes the city in the array
-                pastCityNames.splice(cityindex, 1)
+                pastCityNames.splice(cityindex, 1);
                 cityListEl.innerHTML = "";
                 addPastCity();
                 return
@@ -80,6 +86,32 @@ function searchWeatherApi(query) {
         .catch(function (error) {
             console.error(error);
         });
+}
+
+// function for the modal
+function showModal(){
+
+    showWeather.hidden = true;
+    showPlaylist.hidden = true;
+
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+    var modalText = document.getElementsByClassName("modal-content");
+
+    modalText.textContent = ("Error, please try again");
+
+    modal.style.display = "block";
+
+    span.onclick = function() {
+        modal.style.display = "none";
+      }
+
+    window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        }
+    } 
+    changeBackground("modal");
 }
 
 
@@ -187,6 +219,12 @@ function changeBackground(condition) {
         document.getElementById("rain").innerHTML = "";
         setInterval(makeItSnow, 50);
         makeItSnow();
+    }
+    else if(condition == "modal"){
+        document.body.style.backgroundImage = "url('./assets/images/wavy.jpg')";
+        weatherCondition = "modal";
+        makeItSnow(weatherCondition);
+        document.getElementById("rain").innerHTML = "";
     }
     else {
         document.body.style.backgroundImage = "url('./assets/images/fog.jpg')";
