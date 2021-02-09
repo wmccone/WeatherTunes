@@ -1,7 +1,5 @@
 //Weather APP Code
 
-// Display current city in header of the Weather Element
-// Display current weather condition in the text of the Weather Element
 var currentCityName = document.querySelector("#currentcity");
 var currentTempurature = document.querySelector("#cur-temp");
 var currentHumidity = document.querySelector("#cur-humid");
@@ -13,8 +11,10 @@ var apiKey = "86be0edea7b654b425b0a2a7b7fa2fe5";
 var currentWeatherCondition = "";
 
 function printCurrentWeather(result) {
+    // Display current city in header of the Weather Element
     currentWeatherCondition = result.weather[0].main
     currentCityName.textContent = result.name + ": "
+    // Display current weather condition in the text of the Weather Element
     currentTempurature.textContent = "Temperature: " + result.main.temp + "°F"
     currentHumidity.textContent = "Humidity : " + result.main.humidity + "%"
     currentWindSpeed.textContent = "Wind Speed: " + result.wind.speed + " MPH"
