@@ -138,9 +138,9 @@ function searchMusicAPI(condition) {
                 //Adds the music link to the iframe
                 printMusic(music);
                 //Sets the music object to a variable
-                musicObject = music
+                musicObject = music;
                 //Starts writing the music controls to the page
-                writeMusicControls(music)
+                writeMusicControls(music);
                 //Sends the music object to the global scope for use in writing the music controls.
                 return musicObject
 
@@ -156,11 +156,6 @@ function searchMusicAPI(condition) {
 
 var weatherCondition;
 function changeBackground(condition) {
-// Sets main background image
-var mainWallpaper = document.body.style["background-image"] = "url('./assets/images/wavy.jpg')";
-console.log(mainWallpaper);
-var body = document.querySelector('body');
-body.setAttribute("class", 'cloudPic');    
 
     if (condition == "Clear" || condition == "Clouds") {
         document.body.style.backgroundImage = "url('./assets/images/sun.jpg')";
@@ -292,6 +287,13 @@ function storeCities() {
 }
 
 function init() {
+
+    // sets the intial wallpaper
+    document.body.style.backgroundImage = "url('./assets/images/wavy.jpg')";
+    console.log(mainWallpaper);
+    var body = document.querySelector('body');
+    body.setAttribute("class", 'cloudPic');   
+
     var storedCities = JSON.parse(localStorage.getItem("storedCities"));
 
     if (storedCities != null) {
