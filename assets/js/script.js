@@ -11,8 +11,16 @@ var currentWeatherEl = document.querySelector("#currentweather");
 var dateVar = moment().format('L');
 var apiKey = "86be0edea7b654b425b0a2a7b7fa2fe5";
 var currentWeatherCondition = "";
+var playlistTextEl = document.querySelector("#playlist-text");
 
 function printCurrentWeather(result) {
+    // show text elements
+    currentCityName.hidden = false;
+    playlistTextEl.hidden = false;
+
+    //erases input text
+    cityInput.value= "";
+
     currentWeatherCondition = result.weather[0].main
     currentCityName.textContent = result.name + ": "
     currentTempurature.textContent = "Temperature: " + result.main.temp + "°F"
@@ -37,6 +45,8 @@ function searchWeatherApi(query) {
             // If API does not respond throw up an error
             if (response.status === 404){
                 console.log("no city found")
+                //erases input text
+                cityInput.value= "";
                 //This will tell the user to enter their info again if they use an invalit input for the weather fetch.
                 currentCityName.textContent = "City not found, please re-enter city"
                 //This will remove their invalid input from the storage array for the cities
@@ -78,7 +88,7 @@ function searchWeatherApi(query) {
 var videoControlsEl = document.querySelector("#video-controls")
 var musicWidgetEl = document.querySelector("iframe");
 
-var googopener = "";
+var googopener = "AIzaSyC6AjZrA1QFsATo8QhRRXE2stCcwCIwomc";
 var musicObject = []
 
 // create a function to update the music to the page
@@ -138,9 +148,9 @@ function searchMusicAPI(condition) {
                 //Adds the music link to the iframe
                 printMusic(music);
                 //Sets the music object to a variable
-                musicObject = music
+                musicObject = music;
                 //Starts writing the music controls to the page
-                writeMusicControls(music)
+                writeMusicControls(music);
                 //Sends the music object to the global scope for use in writing the music controls.
                 return musicObject
 
@@ -286,6 +296,13 @@ function storeCities() {
 }
 
 function init() {
+    // sets the intial wallpaper
+    document.body.style.backgroundImage = "url('./assets/images/wavy.jpg')";
+
+    //hide text elements
+    currentCityName.hidden = true;
+    playlistTextEl.hidden = true;
+
     var storedCities = JSON.parse(localStorage.getItem("storedCities"));
 
     if (storedCities != null) {
