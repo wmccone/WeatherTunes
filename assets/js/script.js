@@ -1,7 +1,5 @@
 //Weather APP Code
 
-// Display current city in header of the Weather Element
-// Display current weather condition in the text of the Weather Element
 var currentCityName = document.querySelector("#currentcity");
 var currentTempurature = document.querySelector("#cur-temp");
 var currentHumidity = document.querySelector("#cur-humid");
@@ -27,6 +25,7 @@ function printCurrentWeather(result) {
 
     currentWeatherCondition = result.weather[0].main
     currentCityName.textContent = result.name + ": "
+    // Display current weather condition in the text of the Weather Element
     currentTempurature.textContent = "Temperature: " + result.main.temp + "°F"
     currentHumidity.textContent = "Humidity : " + result.main.humidity + "%"
     currentWindSpeed.textContent = "Wind Speed: " + result.wind.speed + " MPH"
@@ -254,6 +253,7 @@ submitBtn.addEventListener("click", function (event) {
     cityName = cityInput.value;
     //converts city name to lowercase to make inputs uniform
     cityName = cityName.toLowerCase()
+    cityName = cityName.trim()
     //If array already contains the city remove the duplicate from the array.
     if (pastCityNames.includes(cityName)) {
         //finds the index of the duplicate in the array
@@ -315,6 +315,8 @@ function addPastCity() {
     cityBtn.forEach(function(cityBtn) {
         cityBtn.addEventListener("click", function(){ 
             var clickedCity = this.textContent;
+            //setting 
+            clickedCity = clickedCity.toLowerCase()
             searchWeatherApi(clickedCity);
             //Finds the index of the city clicked in the storage array
             var arrayLoc = pastCityNames.indexOf(clickedCity)
