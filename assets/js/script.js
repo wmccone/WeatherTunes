@@ -18,6 +18,9 @@ function printCurrentWeather(result) {
     currentCityName.hidden = false;
     playlistTextEl.hidden = false;
 
+    //erases input text
+    cityInput.value= "";
+
     currentWeatherCondition = result.weather[0].main
     currentCityName.textContent = result.name + ": "
     currentTempurature.textContent = "Temperature: " + result.main.temp + "°F"
@@ -42,6 +45,8 @@ function searchWeatherApi(query) {
             // If API does not respond throw up an error
             if (response.status === 404){
                 console.log("no city found")
+                //erases input text
+                cityInput.value= "";
                 //This will tell the user to enter their info again if they use an invalit input for the weather fetch.
                 currentCityName.textContent = "City not found, please re-enter city"
                 //This will remove their invalid input from the storage array for the cities
