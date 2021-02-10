@@ -39,16 +39,16 @@ THEN my location is saved to local storage when I return
 [Spotify](https://developer.spotify.com/documentation/web-api/quick-start/) 
 and/or 
 [Soundcloud](https://developers.soundcloud.com/docs/api/guide)
+and/or
+[YouTube API](https://developers.google.com/youtube/v3)
 
 [Openweather](https://openweathermap.org/current)
 
 ## Task Breakdown
 
-* Jackie: Local storage / input forms
+* Jackie: Form inputs, Local storage, logic structure, backgrounds, and bug fixes
 
-* Trace: Music API / CSS
+* Trace: CSS, Implementing Materialize, and weather animations
 
-* Michael: Background Images/ HTML
-
-* Walter: Weather API / Initial HTML structure
+* Walter: Implementing Open Weather Map API, Implementing Youtube API, structuring HTML and JavaScript files.
 

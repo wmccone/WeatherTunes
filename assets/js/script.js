@@ -1,7 +1,5 @@
 //Weather APP Code
 
-// Display current city in header of the Weather Element
-// Display current weather condition in the text of the Weather Element
 var currentCityName = document.querySelector("#currentcity");
 var currentTempurature = document.querySelector("#cur-temp");
 var currentHumidity = document.querySelector("#cur-humid");
@@ -12,17 +10,22 @@ var dateVar = moment().format('L');
 var apiKey = "86be0edea7b654b425b0a2a7b7fa2fe5";
 var currentWeatherCondition = "";
 var playlistTextEl = document.querySelector("#playlist-text");
+var showWeather = document.querySelector("#current-city-weather");
+var showPlaylist = document.querySelector("#playlist");
 
 function printCurrentWeather(result) {
     // show text elements
     currentCityName.hidden = false;
     playlistTextEl.hidden = false;
+    showWeather.hidden = false;
+    showPlaylist.hidden = false;
 
     //erases input text
     cityInput.value= "";
 
     currentWeatherCondition = result.weather[0].main
     currentCityName.textContent = result.name + ": "
+    // Display current weather condition in the text of the Weather Element
     currentTempurature.textContent = "Temperature: " + result.main.temp + "°F"
     currentHumidity.textContent = "Humidity : " + result.main.humidity + "%"
     currentWindSpeed.textContent = "Wind Speed: " + result.wind.speed + " MPH"
@@ -37,6 +40,7 @@ function printCurrentWeather(result) {
 
 // This function is going to search the Open Weather API for the fields associated with the city
 function searchWeatherApi(query) {
+
     var cityName = query
     var locationURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial" + "&appid=" + apiKey
 
@@ -48,11 +52,12 @@ function searchWeatherApi(query) {
                 //erases input text
                 cityInput.value= "";
                 //This will tell the user to enter their info again if they use an invalit input for the weather fetch.
-                currentCityName.textContent = "City not found, please re-enter city"
+                currentCityName.textContent = "City not found, please re-enter city";
+                showModal();
                 //This will remove their invalid input from the storage array for the cities
-                var cityindex = pastCityNames.indexOf(cityName)
+                var cityindex = pastCityNames.indexOf(cityName);
                 //removes the city in the array
-                pastCityNames.splice(cityindex, 1)
+                pastCityNames.splice(cityindex, 1);
                 cityListEl.innerHTML = "";
                 addPastCity();
                 return
@@ -81,6 +86,32 @@ function searchWeatherApi(query) {
         .catch(function (error) {
             console.error(error);
         });
+}
+
+// function for the modal
+function showModal(){
+
+    showWeather.hidden = true;
+    showPlaylist.hidden = true;
+
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+    var modalText = document.getElementsByClassName("modal-content");
+
+    modalText.textContent = ("Error, please try again");
+
+    modal.style.display = "block";
+
+    span.onclick = function() {
+        modal.style.display = "none";
+      }
+
+    window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        }
+    } 
+    changeBackground("modal");
 }
 
 
@@ -189,6 +220,12 @@ function changeBackground(condition) {
         setInterval(makeItSnow, 50);
         makeItSnow();
     }
+    else if(condition == "modal"){
+        document.body.style.backgroundImage = "url('./assets/images/wavy.jpg')";
+        weatherCondition = "modal";
+        makeItSnow(weatherCondition);
+        document.getElementById("rain").innerHTML = "";
+    }
     else {
         document.body.style.backgroundImage = "url('./assets/images/fog.jpg')";
         weatherCondition = "Hazy";
@@ -216,6 +253,7 @@ submitBtn.addEventListener("click", function (event) {
     cityName = cityInput.value;
     //converts city name to lowercase to make inputs uniform
     cityName = cityName.toLowerCase()
+    cityName = cityName.trim()
     //If array already contains the city remove the duplicate from the array.
     if (pastCityNames.includes(cityName)) {
         //finds the index of the duplicate in the array
@@ -277,6 +315,8 @@ function addPastCity() {
     cityBtn.forEach(function(cityBtn) {
         cityBtn.addEventListener("click", function(){ 
             var clickedCity = this.textContent;
+            //setting 
+            clickedCity = clickedCity.toLowerCase()
             searchWeatherApi(clickedCity);
             //Finds the index of the city clicked in the storage array
             var arrayLoc = pastCityNames.indexOf(clickedCity)
