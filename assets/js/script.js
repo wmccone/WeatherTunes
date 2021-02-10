@@ -119,7 +119,7 @@ function showModal(){
 var videoControlsEl = document.querySelector("#video-controls")
 var musicWidgetEl = document.querySelector("iframe");
 
-var googopener = "AIzaSyC6AjZrA1QFsATo8QhRRXE2stCcwCIwomc";
+var googopener = "AIzaSyDOOKESENeIXvKw_J4fdw43WzdX5pc1YYs";
 var musicObject = []
 
 // create a function to update the music to the page
