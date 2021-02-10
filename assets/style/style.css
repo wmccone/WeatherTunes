@@ -63,3 +63,9 @@ body {
         font-size: 25px;
     }
 }
+@media only screen and (max-width: 1000px) {
+    .currentsong {
+            width: 300px;
+            max-width: 100%;
+        }
+}
