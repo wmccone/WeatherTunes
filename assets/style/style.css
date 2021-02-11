@@ -58,12 +58,6 @@ body {
     }
 }
 
-@media only screen and (max-width: 700px) {
-    .list-group-item {
-        font-size: 25px;
-    }
-}
-
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
@@ -101,3 +95,16 @@ body {
     text-decoration: none;
     cursor: pointer;
   }
+
+@media only screen and (max-width: 700px) {
+    .list-group-item {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .currentsong {
+            width: 300px;
+            max-width: 100%;
+        }
+}
