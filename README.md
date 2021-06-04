@@ -24,9 +24,9 @@ Each valid city is stored into local storage and displayed as a new button on th
 
 ## Installation
 
-To install, pull repository and open html file in browser. Repository can be found here: [WeatherTunes Repo](https://github.com/wmccone/UTA-Group8-Project-1)
+To install, pull repository and open html file in browser. Repository can be found here: [WeatherTunes Repo](https://github.com/wmccone/WeatherTunes)
 
-Otherwise, the github page can be found here: [WeatherTunes Webpage](https://wmccone.github.io/UTA-Group8-Project-1/)
+Otherwise, the github page can be found here: [WeatherTunes Webpage](https://wmccone.github.io/WeatherTunes/)
 
 
 ## Usage
